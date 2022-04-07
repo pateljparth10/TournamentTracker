@@ -1,8 +1,4 @@
 
-
-from os import name
-
-
 participants_list = []
 start_up_valid = True
 sign_up = True
@@ -28,10 +24,13 @@ def valid_number():
     while valid_number_loop == True:
         number_p = input("Slot Number: ")
         if str(number_p).isdigit():
-            valid_number_loop = False
-            return number_p
+            if int(number_p) <= len(participants_list) and int(number_p) > 0:
+                valid_number_loop = False
+                return number_p
+            else:
+                print("Slot number does not exist. Please try again.")
         else:
-            print("That is not a valid number. Please try again")
+            print("That is not a valid number. Please try again.")
 
 
 while start_up_valid == True:
@@ -49,13 +48,15 @@ print(participants_list)
 print(f"There are {number_of_participants} participants slots ready for sign-up")
 
 #def sign_up():
-# while sign_up:
-#     print("Participants Sign Up")
-#     print("==============================")
-#     participant_name = valid_name()
-#     slot_number = valid_number()
+while sign_up:
+    print("Participants Sign Up")
+    print("==============================")
+    participant_name = valid_name()
+    slot_number = valid_number()
+    if participants_list[int(slot_number) -1] == None:
+        participants_list[int(slot_number) -1] = participant_name
+        sign_up = False
+    else: 
+        print("Error:\n Slot #" + str(slot_number) + " is filled. Please try again." )
 
-practice_name= valid_name()
-practice_number = valid_number()
-
-print(f"Name is {practice_name} and number is {practice_number}")
+print(participants_list)
