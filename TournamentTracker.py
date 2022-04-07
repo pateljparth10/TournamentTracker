@@ -1,7 +1,8 @@
 
 participants_list = []
 start_up_valid = True
-sign_up = True
+
+
 
 def valid_name():
     valid_name_loop = True
@@ -44,19 +45,41 @@ while start_up_valid == True:
     
 for i in range(int(number_of_participants)):
     participants_list.append(None)
-print(participants_list)
+
 print(f"There are {number_of_participants} participants slots ready for sign-up")
 
-#def sign_up():
-while sign_up:
-    print("Participants Sign Up")
-    print("==============================")
-    participant_name = valid_name()
-    slot_number = valid_number()
-    if participants_list[int(slot_number) -1] == None:
-        participants_list[int(slot_number) -1] = participant_name
-        sign_up = False
-    else: 
-        print("Error:\n Slot #" + str(slot_number) + " is filled. Please try again." )
 
-print(participants_list)
+def sign_up():
+    sign_up_loop = True
+    while sign_up_loop:
+        print("Participants Sign Up")
+        print("==============================")
+        participant_name = valid_name()
+        slot_number = valid_number()
+        if participants_list[int(slot_number) -1] == None:
+            participants_list[int(slot_number) -1] = participant_name
+            print("Success:")
+            print(f"{participant_name} is signed up in starting slot #{slot_number}.")
+            sign_up_loop = False
+        else: 
+            print("Error:\n Slot #" + str(slot_number) + " is filled. Please try again." )
+
+
+sign_up()
+
+def cancel_sign_up():
+    cancel_sign_up_loop = True
+    while cancel_sign_up_loop:
+        print("Participants Cancellation")
+        print("==============================")
+        slot_number = valid_number()
+        participant_name = valid_name()
+        if participants_list[int(slot_number) -1] == participant_name:
+            participants_list[int(slot_number) -1] = None
+            print("Success: ")
+            print(f"{participant_name} has been cancelled from starting slot #{slot_number}.")
+            cancel_sign_up_loop = False
+        else: 
+            print("Error:\n" + str(participant_name) + " is not in that starting slot. Please try again." )
+
+cancel_sign_up()
