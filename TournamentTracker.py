@@ -65,9 +65,7 @@ def sign_up():
             print("Error:\n Slot #" + str(slot_number) + " is filled. Please try again." )
 
 
-sign_up()
-sign_up()
-print(participants_list)
+
 def cancel_sign_up():
     cancel_sign_up_loop = True
     while cancel_sign_up_loop:
@@ -99,4 +97,27 @@ def view_participants():
                     print(f"{i+ 1} : {participants_list[i]}")
         view_participants_loop = False
 
+def save_changes():
+    save_changes_loop = True
+    while save_changes_loop:
+        print("Save Changes")
+        print("=================")
+        answer = input("Save your changes to CSV? [y/n]")
+        if answer == "y":
+            registration_file = open("C:\Repository\TournamentTracker\Registration.csv","w")
+            for position in range(len(participants_list)):
+                registration_file.write("%i, %s\n" %(position+ 1, participants_list[position]))
+            registration_file.close()
+            print("You have saved all changes.")
+            save_changes_loop = False
+        elif answer == "n":
+            print("Your changes have not been saved.")
+            save_changes_loop = False
+        else:
+            print("That is not a valid input.")
+
+sign_up()
+sign_up()
 view_participants()
+save_changes()        
+
