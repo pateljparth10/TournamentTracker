@@ -56,8 +56,8 @@ def sign_up():
         print("==============================")
         participant_name = valid_name()
         slot_number = valid_number()
-        if participants_list[int(slot_number) -1] == None:
-            participants_list[int(slot_number) -1] = participant_name
+        if participants_list[int(slot_number)-1] == None:
+            participants_list[int(slot_number)-1] = participant_name
             print("Success:")
             print(f"{participant_name} is signed up in starting slot #{slot_number}.")
             sign_up_loop = False
@@ -66,7 +66,8 @@ def sign_up():
 
 
 sign_up()
-
+sign_up()
+print(participants_list)
 def cancel_sign_up():
     cancel_sign_up_loop = True
     while cancel_sign_up_loop:
@@ -82,4 +83,20 @@ def cancel_sign_up():
         else: 
             print("Error:\n" + str(participant_name) + " is not in that starting slot. Please try again." )
 
-cancel_sign_up()
+
+
+def view_participants():
+    view_participants_loop = True
+    while view_participants_loop:
+        print("View Participants")
+        print("===========================")
+        slot_number = valid_number()
+        slot_min = int(slot_number) -6
+        slot_max = int(slot_number) + 5
+        for i in range(slot_min,slot_max):
+            if i > -1:
+                if i < len(participants_list):
+                    print(f"{i+ 1} : {participants_list[i]}")
+        view_participants_loop = False
+
+view_participants()
