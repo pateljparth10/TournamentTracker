@@ -33,20 +33,31 @@ def valid_number():
         else:
             print("That is not a valid number. Please try again.")
 
-
-while start_up_valid == True:
-    print("Welcome to Tournament R Us")
-    print("==========================")
-    number_of_participants = input("Enter the number of participants: ")
-    if str(number_of_participants).isdigit():
-        start_up_valid = False
-    else:
-        print("That is not a valid number. Please try again.")
-    
-for i in range(int(number_of_participants)):
-    participants_list.append(None)
-
-print(f"There are {number_of_participants} participants slots ready for sign-up")
+def main_menu():
+    main_menu_loop = True
+    while main_menu_loop:
+        print("Participant Menu")
+        print("===================")
+        print("1. Sign Up")
+        print("2. Cancel Sign Up")
+        print("3. View Participants")
+        print("4. Save Changes")
+        print("5. Exit")
+        selection = input("Please choose a selection.")
+        if selection == "1":
+            sign_up()
+        elif selection =="2":
+            cancel_sign_up()
+        elif selection =="3":
+            view_participants()
+        elif selection =="4":
+            save_changes()
+        elif selection =="5":
+            main_menu_loop = False
+            main_menu_loop= exit()
+            break
+        else:
+            print("That is not a valid input. Please try again.")
 
 
 def sign_up():
@@ -63,6 +74,7 @@ def sign_up():
             sign_up_loop = False
         else: 
             print("Error:\n Slot #" + str(slot_number) + " is filled. Please try again." )
+    main_menu()
 
 
 
@@ -80,7 +92,7 @@ def cancel_sign_up():
             cancel_sign_up_loop = False
         else: 
             print("Error:\n" + str(participant_name) + " is not in that starting slot. Please try again." )
-
+    main_menu()
 
 
 def view_participants():
@@ -96,6 +108,7 @@ def view_participants():
                 if i < len(participants_list):
                     print(f"{i+ 1} : {participants_list[i]}")
         view_participants_loop = False
+    main_menu()
 
 def save_changes():
     save_changes_loop = True
@@ -115,9 +128,40 @@ def save_changes():
             save_changes_loop = False
         else:
             print("That is not a valid input.")
+    main_menu()
 
-sign_up()
-sign_up()
-view_participants()
-save_changes()        
+
+def exit():
+    exit_loop = True
+    exit_tournament_traker = False
+    while exit_loop:
+        print("Exit")
+        print("=====")
+        print("Any unsaved changes will be lost.")
+        selection = input("Are you sure you want to exit? [y/n]")
+        if selection == "n":
+            exit_loop = False
+            main_menu()
+        elif selection =="y":
+            exit_loop = False
+            return exit_tournament_traker
+        else:
+            print("That is not a valid input. Please try again.")
+            
+
+
+while start_up_valid == True:
+    print("Welcome to Tournament R Us")
+    print("==========================")
+    number_of_participants = input("Enter the number of participants: ")
+    if str(number_of_participants).isdigit():
+        start_up_valid = False
+    else:
+        print("That is not a valid number. Please try again.")
+    
+for i in range(int(number_of_participants)):
+    participants_list.append(None)
+
+print(f"There are {number_of_participants} participants slots ready for sign-up")
+main_menu()
 
